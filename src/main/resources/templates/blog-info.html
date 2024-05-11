@@ -1,0 +1,30 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>НОВОСТИ ДЕЛИДРАЙВА</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+</head>
+    <body>
+        <header th:insert="~{blocks/header :: header}"></header>
+
+        <div class="container mt-5">
+            <h1>Просмотр обьявления</h1>
+            <div th:each="el : ${announcement}" class="alert alert-info mt-2">
+                <h3 th:text="${el.car_name}"></h3>
+                <p><b>Мощность: </b><span th:text="${el.power}"/></p>
+                <p><b>Кол-во сидений: </b><span th:text="${el.seats}"/></p>
+                <p><b>Поколение: </b><span th:text="${el.generation}"/></p>
+                <p><b>Цвет: </b><span th:text="${el.color}"/></p>
+                <p th:text="${el.full_text}"></p>
+                <p><b>Цена: </b><span th:text="${el.price}"/></p>
+                <a th:href="'/blog/' + ${el.id} + '/edit'" class="btn btn-warning">Редактировать</a>
+                <form th:action="'/blog/' + ${el.id} + '/remove'" method="post">
+                    <button class="btn btn-warning" type="submit">Удалить</button>
+                </form>
+            </div>
+        </div>
+
+        <div th:insert="~{blocks/footer :: footer}"></div>
+    </body>
+</html>

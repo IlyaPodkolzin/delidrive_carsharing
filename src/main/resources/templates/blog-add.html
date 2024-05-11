@@ -1,0 +1,27 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>НОВОСТИ ДЕЛИДРАЙВА</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+</head>
+    <body>
+        <header th:insert="~{blocks/header :: header}"></header>
+
+        <div class="container mt-5 mb-5">
+            <h1>ДОБАВЛЕНИЕ МАШИНЫ</h1>
+            <form action="/blog/add" method="post">
+                <input type="text" name="car_name" placeholder="Введите название машины" class="form-control"><br>
+                <input type="number" min="1" name="power" placeholder="Введите мощность" class="form-control"><br>
+                <input type="number" min="1" name="seats" placeholder="Введите кол-во мест" class="form-control"><br>
+                <input type="number" min="1" name="generation" placeholder="Введите поколение" class="form-control"><br>
+                <input type="text" name="color" placeholder="Введите цвет машины" class="form-control"><br>
+                <textarea name="full_text" placeholder="Введите текст обьявления" class="form-control"></textarea><br>
+                <input type="number" min="1" name="price" placeholder="Введите цену за день аренды в рублях" class="form-control">
+                <button type="submit" class="btn btn-success">Добавить статью</button>
+            </form>
+        </div>
+
+        <div th:insert="~{blocks/footer :: footer}"></div>
+    </body>
+</html>
