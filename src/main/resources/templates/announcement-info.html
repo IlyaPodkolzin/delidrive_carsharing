@@ -18,9 +18,18 @@
                 <p><b>Цвет: </b><span th:text="${el.color}"/></p>
                 <p th:text="${el.full_text}"></p>
                 <p><b>Цена: </b><span th:text="${el.price}"/></p>
-                <a th:href="'/blog/' + ${el.id} + '/edit'" class="btn btn-warning">Редактировать</a>
-                <form th:action="'/blog/' + ${el.id} + '/remove'" method="post">
+                <p th:text="'От: ' + ${el.user.name} + ' (' + ${el.user.email} + ')'">
+                <div th:if="${el.user.email} == ${currentUser.email}">
+                    <a th:href="'/announcement/' + ${el.id} + '/edit'" class="btn btn-warning">Редактировать</a>
+                </div>
+                <form th:if="${el.user.email} == ${currentUser.email}" th:action="'/announcement/' + ${el.id} + '/remove'" method="post">
                     <button class="btn btn-warning" type="submit">Удалить</button>
+                </form>
+                <form th:if="${el.user.email} != ${currentUser.email} and !${el.renter}" th:action="'/announcement/' + ${el.id} + '/rent'" method="post">
+                    <button class="btn btn-warning" type="submit">Взять в аренду</button>
+                </form>
+                <form th:if="${el.user.email} != ${currentUser.email} and ${el.renter}" th:action="'/announcement/' + ${el.id} + '/unrent'" method="post">
+                    <button class="btn btn-warning" type="submit">Прекратить аренду</button>
                 </form>
             </div>
         </div>

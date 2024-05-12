@@ -1,0 +1,36 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>НОВОСТИ ДЕЛИДРАЙВА</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+</head>
+<body>
+<header th:insert="~{blocks/header :: header}"></header>
+
+<div class="container mt-5">
+    <h1>Личный кабинет</h1>
+    <div class="alert alert-info mt-2">
+        <h3 th:text="${user.name}"></h3>
+        <p><b>Эл. почта: </b><span th:text="${user.email}"/></p>
+        <p><b>Номер телефона: </b><span th:text="${user.phoneNumber}"/></p>
+        <p><b>Дата регистрации: </b><span th:text="${#temporals.format(user.dateCreated, 'dd-MM-yyyy HH:mm')}"/></p>
+    </div>
+
+    <div class="container mt-5">
+        <h1>Арендованные машины</h1>
+        <div th:each="el : ${rentedAnnouncements}" class="alert alert-info mt-2">
+            <h3 th:text="${el.car_name}"></h3>
+            <p th:text="'Мощность: ' + ${el.power} + ' лс.'"></p>
+            <p th:text="'Количество сидений: ' + ${el.seats} + ' шт.'"></p>
+            <p th:text="'Поколение: ' + ${el.generation} + '-е поколение'"></p>
+            <p th:text="'Цвет: ' + ${el.color}"></p>
+            <p th:text="'Цена: ' + ${el.price} + ' руб/день'"></p>
+            <a th:href="'/announcement/' + ${el.id}" class="btn btn-warning">Подробнее</a>
+        </div>
+    </div>
+</div>
+
+<div th:insert="~{blocks/footer :: footer}"></div>
+</body>
+</html>

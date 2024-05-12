@@ -19,7 +19,7 @@
                     <input th:value="${el.color}" type="text" name="color" placeholder="Введите цвет машины" class="form-control"><br>
                     <textarea name="full_text" placeholder="Введите текст обьявления" class="form-control" th:text="${el.full_text}"></textarea><br>
                     <input th:value="${el.price}" type="number" min="1" name="price" placeholder="Введите цену за день аренды в рублях" class="form-control"><br>
-                    <button type="submit" class="btn btn-success">Обновить обьявление</button>
+                    <button th:if="${el.user.email} == ${currentUser.email}" type="submit" class="btn btn-success">Обновить обьявление</button>
                 </form>
             </div>
         </div>

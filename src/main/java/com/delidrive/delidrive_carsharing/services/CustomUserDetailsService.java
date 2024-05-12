@@ -1,6 +1,6 @@
 package com.delidrive.delidrive_carsharing.services;
 
-import com.delidrive.delidrive_carsharing.repos.UserRepository;
+import com.delidrive.delidrive_carsharing.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

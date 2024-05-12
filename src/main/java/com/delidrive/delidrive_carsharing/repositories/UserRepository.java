@@ -1,4 +1,4 @@
-package com.delidrive.delidrive_carsharing.repos;
+package com.delidrive.delidrive_carsharing.repositories;
 
 import com.delidrive.delidrive_carsharing.models.User;
 import org.springframework.data.jpa.repository.JpaRepository;

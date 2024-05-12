@@ -10,14 +10,14 @@
 
         <div class="container mt-5">
             <h1>Машины для аренды</h1>
-            <div th:each="el : ${announces}" class="alert alert-info mt-2">
+            <div th:each="el : ${announcements}" th:if="!${el.renter}" class="alert alert-info mt-2">
                 <h3 th:text="${el.car_name}"></h3>
                 <p th:text="'Мощность: ' + ${el.power} + ' лс.'"></p>
                 <p th:text="'Количество сидений: ' + ${el.seats} + ' шт.'"></p>
                 <p th:text="'Поколение: ' + ${el.generation} + '-е поколение'"></p>
                 <p th:text="'Цвет: ' + ${el.color}"></p>
                 <p th:text="'Цена: ' + ${el.price} + ' руб/день'"></p>
-                <a th:href="'/blog/' + ${el.id}" class="btn btn-warning">Подробнее</a>
+                <a th:href="'/announcement/' + ${el.id}" class="btn btn-warning">Подробнее</a>
             </div>
         </div>
 

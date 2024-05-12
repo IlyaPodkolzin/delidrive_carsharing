@@ -1,12 +1,16 @@
 package com.delidrive.delidrive_carsharing.services;
 
+import com.delidrive.delidrive_carsharing.models.Announcement;
 import com.delidrive.delidrive_carsharing.models.User;
 import com.delidrive.delidrive_carsharing.models.enums.Role;
-import com.delidrive.delidrive_carsharing.repos.UserRepository;
+import com.delidrive.delidrive_carsharing.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.security.Principal;
+import java.util.List;
 
 @Service
 @Slf4j
@@ -24,5 +28,16 @@ public class UserService {
         log.info("Saving user with email: {}", user.getEmail());
         userRepository.save(user);
         return true;
+    }
+
+    public User getUserByPrincipal(Principal principal) {
+        if (principal == null) return new User();
+        return userRepository.findByEmail(principal.getName());
+    }
+
+    public List<Announcement> getRentedAnnouncements(Principal principal) {
+        if (principal == null) return null;
+        User user = getUserByPrincipal(principal);
+        return user.getTakenAnnouncements();
     }
 }
