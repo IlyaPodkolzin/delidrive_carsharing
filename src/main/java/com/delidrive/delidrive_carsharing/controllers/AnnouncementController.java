@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.security.Principal;
 
 @Controller
@@ -40,8 +42,14 @@ public class AnnouncementController {
                                   @RequestParam String generation,
                                   @RequestParam String full_text,
                                   @RequestParam String price,
-                                  Principal principal) {
-        announcementService.saveAnnouncement(car_name, power, seats, color, generation, full_text, price, principal);
+                                  Principal principal,
+                                  @RequestParam MultipartFile file1,
+                                  @RequestParam MultipartFile file2,
+                                  @RequestParam MultipartFile file3,
+                                  @RequestParam MultipartFile file4) throws IOException {
+        announcementService.saveAnnouncement(car_name, power, seats, color, generation,
+                full_text, price, principal,
+                file1, file2, file3, file4);
         return "redirect:/announcement";
     }
 
@@ -56,7 +64,8 @@ public class AnnouncementController {
     }
 
     @GetMapping("/announcement/{id}/edit")
-    public String announcementEdit(@PathVariable(value = "id") long id, Model model, Principal principal) {
+    public String announcementEdit(@PathVariable(value = "id") long id,
+                                   Model model, Principal principal) {
         if (!announcementService.checkIfAnnouncementExists(id)) {
             return "redirect:/announcement";
         }
@@ -74,8 +83,13 @@ public class AnnouncementController {
                                  @RequestParam String generation,
                                  @RequestParam String full_text,
                                  @RequestParam String price,
-                                 Model model) {
-        announcementService.editAnnouncement(id, car_name, power, seats, color, generation, full_text, price);
+                                 @RequestParam MultipartFile file1,
+                                 @RequestParam MultipartFile file2,
+                                 @RequestParam MultipartFile file3,
+                                 @RequestParam MultipartFile file4) throws IOException {
+        announcementService.editAnnouncement(id, car_name, power, seats, color,
+                generation, full_text, price,
+                file1, file2, file3, file4);
         return "redirect:/announcement";
     }
 

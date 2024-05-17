@@ -40,4 +40,14 @@ public class UserService {
         User user = getUserByPrincipal(principal);
         return user.getTakenAnnouncements();
     }
+
+    public List<Announcement> getAnnouncements(Principal principal) {
+        if (principal == null) return null;
+        User user = getUserByPrincipal(principal);
+        return user.getAnnouncements();
+    }
+
+    public void removeUserById(Long id) {
+        userRepository.deleteById(id);
+    }
 }

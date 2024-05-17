@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.security.Principal;
@@ -40,6 +41,13 @@ public class UserController {
     public String user(Model model, Principal principal) {
         model.addAttribute("user", userService.getUserByPrincipal(principal));
         model.addAttribute("rentedAnnouncements", userService.getRentedAnnouncements(principal));
+        model.addAttribute("yourAnnouncements", userService.getAnnouncements(principal));
         return "user_profile";
+    }
+
+    @PostMapping("/{id}/remove")
+    public String removeUser(@PathVariable Long id) {
+        userService.removeUserById(id);
+        return "redirect:/announcement";
     }
 }

@@ -4,6 +4,10 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+
 @Setter
 @Getter
 @Entity
@@ -21,6 +25,23 @@ public class Announcement {
     @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
     @JoinColumn
     private User renter;
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "announcement")
+    private List<Image> images = new ArrayList<>();
+
+    private Long previewImageId;
+
+    private LocalDate dateOfCreated;
+
+    @PrePersist
+    private void init() {
+        dateOfCreated = LocalDate.now();
+    }
+
+    public void addImageToAnnouncement(Image image) {
+        image.setAnnouncement(this);
+        images.add(image);
+    }
 
     public Announcement() {
     }

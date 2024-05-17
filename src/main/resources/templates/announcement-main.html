@@ -10,13 +10,16 @@
 
         <div class="container mt-5">
             <h1>Машины для аренды</h1>
-            <div th:each="el : ${announcements}" th:if="!${el.renter}" class="alert alert-info mt-2">
+            <div th:each="el : ${announcements}" th:if="!${el.renter}" class="alert alert-dark mt-2">
                 <h3 th:text="${el.car_name}"></h3>
-                <p th:text="'Мощность: ' + ${el.power} + ' лс.'"></p>
-                <p th:text="'Количество сидений: ' + ${el.seats} + ' шт.'"></p>
-                <p th:text="'Поколение: ' + ${el.generation} + '-е поколение'"></p>
-                <p th:text="'Цвет: ' + ${el.color}"></p>
-                <p th:text="'Цена: ' + ${el.price} + ' руб/день'"></p>
+                <img th:src="'/images/' + ${el.previewImageId}" width="20%">
+                <p><b>Мощность: </b><span th:text="${el.power}"/> л. с.</p>
+                <p><b>Кол-во сидений: </b><span th:text="${el.seats}"/> шт.</p>
+                <p><b>Поколение: </b><span th:text="${el.generation}"/>-е поколение</p>
+                <p><b>Цвет: </b><span th:text="${el.color}"/></p>
+                <p th:text="${el.full_text}"></p>
+                <p><b>Цена: </b><span th:text="${el.price}"/> руб/день</p>
+                <p><b>Дата: </b><span th:text="${#temporals.format(el.dateOfCreated, 'dd-MM-yyyy')}"/></p>
                 <a th:href="'/announcement/' + ${el.id}" class="btn btn-warning">Подробнее</a>
             </div>
         </div>

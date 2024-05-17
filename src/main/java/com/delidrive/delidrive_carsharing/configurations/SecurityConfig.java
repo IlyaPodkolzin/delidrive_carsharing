@@ -29,8 +29,8 @@ public class SecurityConfig {
         http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests((requests) -> requests
-                        .requestMatchers("/", "/registration").permitAll()
-                        .requestMatchers("/", "/announcement", "/announcement/add", "/announcement/*",
+                        .requestMatchers("/", "/registration", "/announcement", "images/*").permitAll()
+                        .requestMatchers("/announcement/add", "/announcement/*",
                                 "announcement/*/edit", "announcement/*/remove", "/user")
                         .hasAnyAuthority("ROLE_ADMIN","ROLE_USER")
                         .anyRequest().authenticated()
