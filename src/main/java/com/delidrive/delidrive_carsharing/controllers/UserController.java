@@ -45,7 +45,7 @@ public class UserController {
         return "user_profile";
     }
 
-    @PostMapping("/{id}/remove")
+    @PostMapping("/user/{id}/remove")
     public String removeUser(@PathVariable Long id) {
         userService.removeUserById(id);
         return "redirect:/announcement";

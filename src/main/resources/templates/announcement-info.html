@@ -29,7 +29,7 @@
                 <form th:if="${el.user.email} == ${currentUser.email} or ${isAdmin}" th:action="'/announcement/' + ${el.id} + '/remove'" method="post">
                     <button class="btn btn-warning" type="submit">Удалить</button>
                 </form>
-                <form th:if="${isAdmin} and ${el.user.email} != ${currentUser.email}" th:action="'/' + ${el.user.id} + '/remove'" method="post">
+                <form th:if="${isAdmin} and ${el.user.email} != ${currentUser.email}" th:action="'/user/' + ${el.user.id} + '/remove'" method="post">
                     <button class="btn btn-danger" type="submit">Удалить пользователя</button>
                 </form>
                 <form th:if="${el.user.email} != ${currentUser.email} and !${el.renter}" th:action="'/announcement/' + ${el.id} + '/rent'" method="post">
